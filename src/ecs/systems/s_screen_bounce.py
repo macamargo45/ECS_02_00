@@ -7,13 +7,14 @@ from src.ecs.components.c_transform import CTransform
 from src.ecs.components.c_velocity import CVelocity
 from src.ecs.components.c_surface import CSurface
 
-def system_screen_bounce(world:esper.World, screen:pygame.Surface):
+
+def system_screen_bounce(world: esper.World, screen: pygame.Surface):
     screen_rect = screen.get_rect()
     components = world.get_components(CTransform, CVelocity, CSurface)
 
-    c_t:CTransform
-    c_v:CVelocity
-    c_s:CSurface
+    c_t: CTransform
+    c_v: CVelocity
+    c_s: CSurface
     for _, (c_t, c_v, c_s) in components:
         cuad_rect = c_s.surf.get_rect(topleft=c_t.pos)
         if cuad_rect.left < 0 or cuad_rect.right > screen_rect.width:
