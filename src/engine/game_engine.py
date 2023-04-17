@@ -18,11 +18,10 @@ from src.ecs.systems.s_rendering import system_rendering
 from src.ecs.systems.s_screen_bounce import system_screen_bounce
 from src.ecs.systems.s_screen_bullet import system_screen_bullet
 from src.ecs.systems.s_screen_player import system_screen_player
-from src.helpers.player_config import SpawnPlayer
 from src.helpers.prefab_creator import (create_bullet, create_input_player,
                                         create_player_square)
-from src.helpers.spawn_event_data import SpawnEventData
-from src.helpers.window_config import WindowConfig
+from src.config.event_data_config import EventDataConfig
+from src.config.window_config import WindowConfig
 
 
 class GameEngine:
@@ -36,8 +35,8 @@ class GameEngine:
         self.is_running = False
         self.framerate = WindowConfig().framerate
         self.delta_time = 0
-        self.player_cfg = SpawnEventData().player_info()
-        self.level_player_config = SpawnEventData().level_player()
+        self.player_cfg = EventDataConfig().player_info()
+        self.level_player_config = EventDataConfig().level_player_config()
 
         self.ecs_world = esper.World()
 
@@ -131,9 +130,9 @@ class GameEngine:
                 position_cursor = pygame.Vector2(mouse_pos)
                 c_bullet = self.ecs_world.get_components(CTagBullet)
 
-                if(len(c_bullet) < self.level_player_config["max_bullet"]):
+                if(len(c_bullet) < self.level_player_config["max_bullets"]):
                     create_bullet(self.ecs_world, self._player_t_c.pos,
-                                self._player_s_c.surf.get_size(), position_cursor)
+                                  self._player_s_c.surf.get_size(), position_cursor)
 
             elif (c_input.phase == CommandPhase.END):
                 self._player_v_c.vel.y -= self.player_cfg["input_velocity"]

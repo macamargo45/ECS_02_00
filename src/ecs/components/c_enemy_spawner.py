@@ -1,8 +1,8 @@
-from src.helpers.spawn_event_data import SpawnEventData
+from src.config.event_data_config import EventDataConfig
 
 
 class CEnemySpawner:
     def __init__(self) -> None:
-        spawnEventData = SpawnEventData()
-        level = spawnEventData.level()
+        eventDataConfig = EventDataConfig()
+        level = eventDataConfig.level_config()
         self.level = level

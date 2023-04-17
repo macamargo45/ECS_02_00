@@ -2,9 +2,8 @@ import esper
 import pygame
 
 from src.ecs.components.c_enemy_spawner import CEnemySpawner
-from src.ecs.components.c_transform import CTransform
-from src.helpers.prefab_creator import crear_cuadrado, create_enemy_square
-from src.helpers.spawn_event_data import SpawnEventData
+from src.helpers.prefab_creator import create_enemy_square
+from src.config.event_data_config import EventDataConfig
 
 
 def system_enemy_spawner(world: esper.World, tiempo_transcurrido: float):
@@ -18,8 +17,8 @@ def system_enemy_spawner(world: esper.World, tiempo_transcurrido: float):
 
         if not my_enemy is None:
             my_enemy['used'] = True
-            spawnEventData = SpawnEventData()
-            enemy_data = spawnEventData.enemy_by_type(my_enemy['enemy_type'])
+            eventDataConfig = EventDataConfig()
+            enemy_data = eventDataConfig.enemies_config(my_enemy['enemy_type'])
             pos = pygame.Vector2(
                 my_enemy['position']['x'], my_enemy['position']['y'])
             create_enemy_square(world, pos, enemy_data)

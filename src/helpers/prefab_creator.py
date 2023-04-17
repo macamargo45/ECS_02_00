@@ -11,7 +11,7 @@ from src.ecs.components.c_velocity import CVelocity
 from src.ecs.components.tags.c_tag_bullet import CTagBullet
 from src.ecs.components.tags.c_tag_enemy import CTagEnemy
 from src.ecs.components.tags.c_tag_player import CTagPlayer
-from src.helpers.spawn_event_data import SpawnEventData
+from src.config.event_data_config import EventDataConfig
 
 
 def crear_cuadrado(ecs_world: esper.World, size: pygame.Vector2, pos: pygame.Vector2, vel: pygame.Vector2, col: pygame.Color) -> int:
@@ -58,7 +58,7 @@ def create_input_player(word: esper.World):
 
 
 def create_bullet(world: esper.World, position_player: pygame.Vector2, size_player: pygame.Vector2, position_cursor: pygame.Vector2) -> int:
-    bullet_info = SpawnEventData.bullet_info()
+    bullet_info = EventDataConfig.bullet_info()
 
     velocity_bullet_ini = position_cursor - position_player
     magnitude = math.sqrt(velocity_bullet_ini.x**2 + velocity_bullet_ini.y**2)
